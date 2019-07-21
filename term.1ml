@@ -1,0 +1,9 @@
+module Term
+
+type Term = sig
+  type t;
+
+  var : int -> t;
+  abs : t -> t;
+  app : t -> t -> t;
+end;
