@@ -1,0 +1,13 @@
+module std
+
+Int : sig
+  to_string : int -> string;
+end = struct
+  primitive to_string = "int_to_string";
+end;
+
+String : sig
+  concat : string -> string -> string;
+end = struct
+  primitive concat = "string_concat";
+end;

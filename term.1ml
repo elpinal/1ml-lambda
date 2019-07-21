@@ -1,9 +1,25 @@
 module Term
 
+use "lambda/std"
+
+open std;
+
 type Term = sig
   type t;
 
   var : int -> t;
   abs : t -> t;
   app : t -> t -> t;
+end;
+
+String : Term = struct
+  type t = string;
+
+  open struct
+    paren (x : string) : string = String.concat "(" (String.concat x ")")
+  end;
+
+  var (n : int)       = String.concat "V" (Int.to_string n);
+  abs (x : t)         = String.concat "lambda. " (paren x);
+  app (x : t) (y : t) = String.concat (paren x) (String.concat " " (paren y));
 end;
