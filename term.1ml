@@ -23,3 +23,20 @@ String : Term = struct
   abs (x : t)         = String.concat "lambda. " (paren x);
   app (x : t) (y : t) = String.concat (paren x) (String.concat " " (paren y));
 end;
+
+Shift (d : int) (T : Term) : Term = struct
+  type t = int ~> T.t;
+
+  var (n : int) (c : int) =
+    if Int.ge n c
+      then T.var (n + d)
+      else T.var n
+    end : T.t;
+
+  abs (x : t)         (c : int) = T.abs (x (c + 1));
+  app (x : t) (y : t) (c : int) = T.app (x c) (y c);
+end;
+
+shift_above (c : int) (d : int) (T : Term) (f : (U : Term) -> U.t) = f (Shift d T) c;
+
+shift = shift_above 0;

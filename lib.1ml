@@ -2,3 +2,9 @@ module lib
 
 submodule std
 submodule Term
+
+t1 (T : Term.Term) = T.var 0;
+t2 (T : Term.Term) = T.abs (t1 T);
+t3 (T : Term.Term) = T.app (t1 T) (t2 T);
+
+z = std.print_endline ((Term.shift) 3 (Term.String) t3);
