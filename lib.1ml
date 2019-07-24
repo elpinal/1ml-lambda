@@ -8,3 +8,5 @@ t2 (T : Term.Term) = T.abs (t1 T);
 t3 (T : Term.Term) = T.app (t1 T) (t2 T);
 
 z = std.print_endline ((Term.shift) 3 (Term.String) t3);
+
+y = std.print_endline ((Term.subst) 0 (Term.String) t2 t1);
